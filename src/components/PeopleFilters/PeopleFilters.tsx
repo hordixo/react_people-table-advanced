@@ -14,15 +14,23 @@ export const PeopleFilters = () => {
       <p className="panel-heading">Filters</p>
 
       <p className="panel-tabs" data-cy="SexFilter">
-        <a className={!sex ? 'is-active' : ''} href="#/people">
-          All
-        </a>
-        <a className={sex === 'm' ? 'is-active' : ''} href="#/people?sex=m">
+        <SearchLink params={{ sex: null }}>All</SearchLink>
+        <SearchLink
+          params={{ sex: 'm' }}
+          className={classNames('button', {
+            'is-info': sex === 'm',
+          })}
+        >
           Male
-        </a>
-        <a className={sex === 'f' ? 'is-active' : ''} href="#/people?sex=f">
+        </SearchLink>
+        <SearchLink
+          params={{ sex: 'f' }}
+          className={classNames('button', {
+            'is-info': sex === 'f',
+          })}
+        >
           Female
-        </a>
+        </SearchLink>
       </p>
 
       <div className="panel-block">

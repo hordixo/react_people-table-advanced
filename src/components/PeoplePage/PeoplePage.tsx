@@ -20,6 +20,7 @@ export const PeoplePage = () => {
   const query = searchParams.get('query') || '';
   const visiblePeople = React.useMemo(() => {
     let sorted = [...peoples];
+    const normalizedQuery = query.trim().toLowerCase();
 
     if (sort) {
       if (!sort || !order) {
@@ -53,8 +54,11 @@ export const PeoplePage = () => {
     }
 
     if (query) {
-      sorted = sorted.filter(person =>
-        person.name.toLowerCase().includes(query.toLowerCase()),
+      sorted = sorted.filter(
+        person =>
+          person.name.toLowerCase().includes(normalizedQuery) ||
+          person.motherName?.toLowerCase().includes(normalizedQuery) ||
+          person.fatherName?.toLowerCase().includes(normalizedQuery),
       );
     }
 
